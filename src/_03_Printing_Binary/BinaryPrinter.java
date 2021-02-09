@@ -10,21 +10,27 @@ public class BinaryPrinter {
 	
 	public void printByteBinary(byte b) { //not done
 		// We first want to print the bit in the one's place
-		String converted = convertToBinary(b);
+		 
+		String converted = (byte) (b & 1) + "";
+		System.out.println(converted);
+		String convertFinish = "";
 		
-		for(int i = 0; i < converted.length(); i++) { // (this is the last step, not done correctly should ask)
+		for(int i = 0; i < 8; i++) { // (this is the last step, not done correctly should ask)
 			
-		int onesPlace = converted.charAt(converted.length() - i - 1);
-		System.out.println(onesPlace);
-		// Shift b seven bits to the right
-		int bShifted = (b >> 7);
-		// Use the & operator to "mask" the bit in the one's place
-		// This can be done by "anding" (&) it with the value of 1
-		int mask = onesPlace & 1;
-		// Print the result using System.out.print (NOT System.out.println)
-		System.out.print(mask);
-		//Use this method to print the remaining 7 bits of b
+			// Shift b seven bits to the right
+			
+			// Use the & operator to "mask" the bit in the one's place
+			// This can be done by "anding" (&) it with the value of 1
+			int mask = b & 1;
+			// Print the result using System.out.print (NOT System.out.println)
+			
+			//Use this method to print the remaining 7 bits of b
+		convertFinish = mask + convertFinish;
+		
+		b = (byte) (b >> 1);
+		
 		}
+		System.out.println(convertFinish);
 	}
 	
 	public void printShortBinary(short s) {
@@ -58,7 +64,7 @@ public class BinaryPrinter {
 		//continue
 	}
 	
-	public static String convertToBinary(int input) { //MY METHOD TO CONVERT TO BINARY
+	public static String convertToBinary(int input) { //NOT USING THIS
 		String output = "";
 		int changedInput;
 
