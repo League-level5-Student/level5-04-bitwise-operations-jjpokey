@@ -50,7 +50,24 @@ public class Base64Decoder {
 	//   array should be the binary value of the encoded characters.
 	public static byte[] convert4CharsTo24Bits(String s){
 		byte[] byteArray = {0,0,0};
+		char[] charArray = s.toCharArray();
 		
+		int shift = convertBase64Char(charArray[0]) << 2;
+		int shift2 = convertBase64Char(charArray[1]) >> 4;
+		
+		byteArray[0] = (byte) (shift | shift2);
+		
+		shift = convertBase64Char(charArray[1]) << 4;
+		
+		shift2 = convertBase64Char(charArray[2]) >> 2;
+		
+		byteArray[1] = (byte) (shift | shift2);
+		
+		shift = convertBase64Char(charArray[2]) << 6;
+		
+		shift2 = convertBase64Char(charArray[3]);
+		
+		byteArray[2] = (byte) (shift | shift2);
 		
 		
 		return byteArray;
@@ -59,6 +76,9 @@ public class Base64Decoder {
 	//3. Complete this method so that it takes in a string of any length
 	//   and returns the full byte array of the decoded base64 characters.
 	public static byte[] base64StringToByteArray(String file) {
+		byte[] byteArray;
+		
+		
 		return null;
 	}
 }
