@@ -12,7 +12,7 @@ public class PseudoRNG {
 	public long seed;
 	//2. Make a constructor that initializes the memeber variable
 	public PseudoRNG(long seed) {
-		seed = this.seed;
+		this.seed = seed;
 	}
 	//3. Complete the steps inside the xorShift method
 	
@@ -30,25 +30,25 @@ public class PseudoRNG {
 		//   We will only use the local variable for the rest of the method
 		long seed = this.seed;
 		//2. Shift seed to the left 13 bits and save the result
-		seed = (seed << 13);
+		long seed2 = (seed << 13);											 //step 1
 		//3. xor seed by the result of step 1 and save that result
-		
+		long seed3 = seed^seed2; 											//step 2
 		//4. Set seed equal to the result of step 2
-	
+	seed = seed3; 															//step 3
 		//5. Shift seed to the right 7 bits and save the result
-		
+		long seed4 = (seed >> 7); 												//step 4
 		//6. xor seed by the result of step 4 and save that result
-				
+				long seed5 = seed^seed4; 										//step 5
 		//7. Set seed equal to the result of step 5
-		
+		seed = seed5; 															//step 6
 		//8. Shift seed to the left 17 bits and save the result
-		
+		long seed6 = (seed << 17); 												//step 7
 		//9. xor seed by the result of step 7 and save that result
-				
+			long seed7 = seed^seed6; 											//step 8
 		//10. Set seed equal to the result of step 8
-		
+		seed = seed7;
 		//11. change the line below to return seed
-		return 0;
+		return seed;
 		
 		//For fun, see if you can rewrite the method using only 4 lines of code
 	}
@@ -58,11 +58,17 @@ public class PseudoRNG {
 	public static void main(String[] args) {
 	
 		//1. Create a PseudoRNG object with any seed. 
-		
+		PseudoRNG pRNG = new PseudoRNG(System.currentTimeMillis());
+		System.out.println("Time: " + System.currentTimeMillis());
 		//2. Print the result of xorShift() 3 times and note the random numbers. 
-		
-		//3. Create a secon PSeudoRNG object with a different seed and print the result of xorShift 3 times.
-		
+		for(int i = 0; i < 3; i++) {
+			System.out.println(pRNG.xorShift());	
+		}
+		//3. Create a second PSeudoRNG object with a different seed and print the result of xorShift 3 times.
+		PseudoRNG pRNG2 = new PseudoRNG(System.currentTimeMillis());
+		for(int j = 0; j < 3; j++) {
+			System.out.println(pRNG2.xorShift());	
+		}
 		//4. Run the tests a second time and notice that 3 random numbers are the same because the seed generates the same sequence of random numbers.
 		
 		//If you would like to set the seed with a number that is hard to predict, you can use System.currentTimeMillis().
